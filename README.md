@@ -3,4 +3,4 @@
 **Clona este repositorio:**
 
 ```bash
-git clone [https://github.com/LuisM711/dss_new](https://github.com/LuisM711/dss_new)
+git clone https://github.com/LuisM711/dss_new

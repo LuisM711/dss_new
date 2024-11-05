@@ -1,0 +1,61 @@
+ <div>
+  <h2>Matriz de Decisión</h2>
+</div>
+
+<div class="selp">
+  <mat-form-field>
+    <mat-label>Proyectos</mat-label>
+    <mat-select class="selm" (selectionChange)="onProyectoSeleccionado($event.value)" [(value)]="proyectoSeleccionado">
+      <mat-option [value]="null" disabled>Seleccione un proyecto</mat-option>
+      <mat-option *ngFor="let proyecto of proyectos" [value]="proyecto.id">
+        {{ proyecto.nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+
+
+<div class="deap">
+
+  <div *ngIf="errorCargandoAlternativas">
+    <p>No existen alternativas para este proyecto.</p>
+  </div>
+  
+  <div *ngIf="errorCargandoCriterios">
+    <p>No existen criterios para este proyecto.</p>
+  </div>
+  
+  <div *ngIf="errorCargandoPonderaciones">
+    <p>No hay ponderaciones disponibles para los criterios.</p>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!errorCargandoCriterios && !errorCargandoAlternativas">
+    <ng-container matColumnDef="header">
+      <th mat-header-cell *matHeaderCellDef> Criterios/Alternativas </th>
+      <td mat-cell *matCellDef="let element"> {{element.header}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="ponderacion">
+      <th mat-header-cell *matHeaderCellDef> Peso de Criterio </th>
+      <td mat-cell *matCellDef="let element"> {{element.ponderacion}} </td>
+    </ng-container>
+
+    
+    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+      <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
+      <td mat-cell *matCellDef="let element">
+        <input matInput type="number" [(ngModel)]="element[column]" min="1" max="10">
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="fullColumnList"></tr>
+    <tr mat-row *matRowDef="let row; columns: fullColumnList;"></tr>
+  </table>
+
+  <div class="container">
+    <button mat-button (click)="guardarValores()" class="boton">Guardar Valores</button>
+  </div>
+
+</div>

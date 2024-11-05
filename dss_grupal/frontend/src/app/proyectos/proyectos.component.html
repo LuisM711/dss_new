@@ -1,0 +1,38 @@
+<h2>CRUD de Proyectos</h2>
+<div>
+    <p>ID: <br><input type="number" min="0" [(ngModel)]="proj.id"></p>
+    <p>Nombre:<br> <input type="text" [(ngModel)]="proj.Nombre"></p>
+    <p>Objetivo: <br><textarea rows="10" cols="50" [(ngModel)]="proj.Descripcion"></textarea></p>
+    <p class="botones">
+        <button (click)="agregar()">Agregar</button>
+        <button (click)="consultar()">Consultar</button>
+        <button (click)="modificar()">Modificar</button>
+        <button (click)="borrar()">Eliminar</button>
+    </p>
+</div>
+
+<h3>Lista de Proyectos</h3>
+@if(hayRegistros()) {
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Seleccionar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(proj of projects;track proj.id) {
+                <tr>
+                    <td>{{ proj.id }}</td>
+                    <td>{{ proj.nombre }}</td>
+                    <td>{{ proj.objetivo }}</td>
+                    <td><button (click)="seleccionar(proj)">Seleccionar</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} @else {
+    <p>No hay proyectos registrados</p>
+}

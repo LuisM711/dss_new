@@ -1,0 +1,51 @@
+<h2>CRUD de Alternativas</h2>
+<div>
+    <p>Nombre de proyecto: 
+        <br>
+        <select [(ngModel)]="alternativasProj.id">
+          <option value="" disabled selected>Selecciona un proyecto</option>
+          @for(proj of proyectos; track alternativasProj.id){
+            <option value="{{ proj.id }}">{{ proj.nombre }}</option>
+          }
+        </select>
+      </p>
+       
+    <p>ID de la alternativa: <br><input type="number" min="0" [(ngModel)]="alternativasProj.idAlternativa"></p>
+    <p>Nombre de la alternativa<br> <input type="text" [(ngModel)]="alternativasProj.nombre"></p>
+    <p>Descripcion de la alternativa: <br><textarea rows="10" cols="50" [(ngModel)]="alternativasProj.descripcion">
+    </textarea></p>
+    <p class="botones">
+        <button (click)="agregarAlternativa()">Agregar</button>
+        <button (click)="consultarAlternativa()">Consultar</button>
+        <button (click)="modificarAlternativa()">Modificar</button>
+        <button (click)="eliminarAlternativa()">Eliminar</button> 
+    </p>
+</div>
+
+<h3>Lista de Alternativas</h3>
+@if(hayAlternativas()) {
+    <table>
+        <thead>
+            <tr>
+                <th>ID Proyecto</th>
+                <th>ID Alternativa</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Seleccionar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(alter of alternativas;track alter.id) {
+                <tr>
+                    <td>{{ alter.id_proyecto }}</td>
+                    <td>{{ alter.id }}</td>
+                    <td>{{ alter.nombre }}</td>
+                    <td>{{ alter.descripcion }}</td>
+                    <td><button (click)="seleccionarAlternativa(alter)">Seleccionar</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} @else {
+    <p style="display: flex; justify-content: center; align-items: center; font-size: 16px; text-transform: uppercase; letter-spacing: 3px;">No hay alternativas</p>
+}

@@ -1,33 +1,11 @@
 {
-  "name": "dss",
+  "name": "backend-dss-grupal",
   "version": "1.0.0",
-  "description": "Sistemas de apoyo a la toma de decisiones",
+  "description": "Este es el puro backend del DSS grupal",
   "main": "index.js",
   "scripts": {
-
-    "test": "echo Error: no test specified && exit 1",
-    "start": "ts-node src/app.ts",
-    "build": "tsc",
-    "serve": "node dist/app.js",
-    "dev": "nodemon src/app.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21",
-    "@types/node": "^22.5.5",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.0",
-    "mysql2": "^3.11.3",
-    "sequelize": "^6.37.3",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.6.2"
-  },
-  "devDependencies": {
-    "@types/sequelize": "^4.28.20",
-    "nodemon": "^3.1.5"
-  }
+  "author": "Equipo GARY & Chavez",
+  "license": "ISC"
 }

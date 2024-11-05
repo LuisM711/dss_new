@@ -1,0 +1,11 @@
+{
+  "name": "frontend-dss-grupal",
+  "version": "1.0.0",
+  "description": "Este es el puro frontend del DSS grupal",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "most of 4-02 students",
+  "license": "ISC"
+}

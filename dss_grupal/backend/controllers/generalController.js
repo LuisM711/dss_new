@@ -23,8 +23,8 @@ module.exports.test = async (req, res) => {
     //insersion de datos
     const proyecto = await ProyectoModel.create({ nombre: 'Laptop(prueba)', descripcion: 'Este proyecto de prueba es para elegir una laptop' });
     const grupos = await GrupoModel.bulkCreate([
-        { nombre: 'Asesores', proyectoId: proyecto.id },
-        { nombre: 'Decisores', proyectoId: proyecto.id }
+        { nombre: 'Asesores', idProyecto: proyecto.id },
+        { nombre: 'Decisores', idProyecto: proyecto.id }
     ]);
     const usuarios = await UsuarioModel.bulkCreate([
         { nombre: 'Asesor 1', idGrupo: grupos[0].id },

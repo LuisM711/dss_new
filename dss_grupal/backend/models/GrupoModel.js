@@ -11,6 +11,10 @@ GrupoModel.init({
     nombre: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    idProyecto: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     }
 }, {
     sequelize,
@@ -18,4 +22,7 @@ GrupoModel.init({
     tableName: 'tb_Grupos',
     timestamps: false
 });
+
+GrupoModel.belongsTo(ProyectoModel, { foreignKey: 'idProyecto' });
+
 module.exports = GrupoModel;

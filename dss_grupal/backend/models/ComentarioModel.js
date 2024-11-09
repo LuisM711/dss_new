@@ -1,41 +1,54 @@
-const { Model, Datatypes, DATE } = require('sequelize');
+const { Model, DataTypes, DATE } = require('sequelize');
+const ProyectoModel = require('./ProyectoModel.js');
+const AlternativaModel = require('./AlternativaModel.js');
+const UsuarioModel = require('./UsuarioModel.js');
 const sequelize = require('../database.js');
 
 class ComentarioModel extends Model { }
 
 ComentarioModel.init({
     idComentario: {
-        type: Datatypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
     },
     idProyecto: {
-        type: Datatypes.INTEGER,
-        allowNull: false
+        type: DataTypes.INTEGER,
+        references: {
+            model: ProyectoModel,
+            key: 'idProyecto'
+        }
     },
     idAlternativa: {
-        type: Datatypes.INTEGER,
-        allowNull: false
+        type: DataTypes.INTEGER,
+        references: {
+            model: AlternativaModel,
+            key: 'idAlternativa'
+        }
     },
     idUsuario: {
-        type: Datatypes.INTEGER,
-        allowNull: false
+        type: DataTypes.INTEGER,
+        references: {
+            model: UsuarioModel,
+            key: 'idUsuario'
+        }
     },
     fecha: {
         type: DATE,
         allowNull: false
     },
     comentario: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     }
-    
-
 }, {
     sequelize,
     modelName: 'ComentarioModel',
     tableName: 'tb_Comentarios',
     timestamps: false
 });
+ComentarioModel.belongsTo(ProyectoModel, { foreignKey: 'idProyecto' });
+ComentarioModel.belongsTo(AlternativaModel, { foreignKey: 'idAlternativa' });
+ComentarioModel.belongsTo(UsuarioModel, { foreignKey: 'idUsuario' });
 
 module.exports = ComentarioModel;

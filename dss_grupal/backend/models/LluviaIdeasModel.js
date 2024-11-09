@@ -1,27 +1,35 @@
-const { Model, Datatypes, DATE } = require('sequelize');
+const { Model, DataTypes, DATE } = require('sequelize');
+const ProyectoModel = require('./ProyectoModel.js');
+const UsuarioModel = require('./UsuarioModel.js');
 const sequelize = require('../database.js');
 
 class LluviaIdeasModel extends Model { }
 LluviaIdeasModel.init({
     idLluviaIdeas: {
-        type: Datatypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
     },
     idProyecto: {
-        type: Datatypes.INTEGER,
-        allowNull: false
+        type: DataTypes.INTEGER,
+        references: {
+            model: ProyectoModel,
+            key: 'idProyecto'
+        }
     },
     idUsuario: {
-        type: Datatypes.INTEGER,
-        allowNull: false
+        type: DataTypes.INTEGER,
+        references: {
+            model: UsuarioModel,
+            key: 'idUsuario'
+        }
     },
     fecha: {
         type: DATE,
         allowNull: false
     },
     idea: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     }
 
@@ -31,6 +39,7 @@ LluviaIdeasModel.init({
     tableName: 'tb_LluviaIdeas',
     timestamps: false
 });
-
+LluviaIdeasModel.belongsTo(ProyectoModel, { foreignKey: 'idProyecto' });
+LluviaIdeasModel.belongsTo(UsuarioModel, { foreignKey: 'idUsuario' });
 module.exports = LluviaIdeasModel;
 

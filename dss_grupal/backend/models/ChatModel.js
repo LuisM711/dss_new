@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const UsuarioModel = require('./UsuarioModel.js');
 const sequelize = require('../database.js');
 
 class ChatModel extends Model { }
@@ -10,7 +11,10 @@ ChatModel.init({
     },
     idUsuario: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        references: {
+            model: UsuarioModel,
+            key: 'idUsuario'
+        }
     },
     fecha: {
         type: DataTypes.DATE,
@@ -31,4 +35,5 @@ ChatModel.init({
     tableName: 'tb_Chats',
     timestamps: false
 });
+ChatModel.belongsTo(UsuarioModel, {foreignKey: 'idUsuario'});
 module.exports = ChatModel;

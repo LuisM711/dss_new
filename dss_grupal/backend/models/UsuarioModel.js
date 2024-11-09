@@ -1,23 +1,25 @@
-const { Model, Datatypes, DATE } = require('sequelize');
+const { Model, DataTypes, DATE } = require('sequelize');
+const GrupoModel = require('./GrupoModel.js');
 const sequelize = require('../database.js');
 
 class UsuarioModel extends Model { }
 UsuarioModel.init({
     idUser: {
-        type: Datatypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
     },
     nombre: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
     },
-    password: {
-        type: Datatypes.STRING,
-        allowNull: false
-    },
-    tipo: {
-
+    idGrupo: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: GrupoModel,
+            key: 'idGrupo'
+        }
     }
 }, {
     sequelize,
@@ -25,4 +27,7 @@ UsuarioModel.init({
     tableName: 'tb_Usuarios',
     timestamps: false
 });
+
+UsuarioModel.belongsTo(GrupoModel, { foreignKey: 'idGrupo' });
+
 module.exports = UsuarioModel;

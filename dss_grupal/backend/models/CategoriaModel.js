@@ -1,24 +1,28 @@
-const { Model, Datatypes, DATE } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
+const ProyectoModel = require('./ProyectoModel.js');
 const sequelize = require('../database.js');
 
 class CategoriaModel extends Model { }
 
 CategoriaModel.init({
     idCategoria: {
-        type: Datatypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
     },
     nombre: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     idProyecto: {
-        type: Datatypes.INTEGER,
-        allowNull: false
+        type: DataTypes.INTEGER,
+        references: {
+            model: ProyectoModel,
+            key: 'idProyecto'
+        }
     },
     estatus: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
 }, {
@@ -27,5 +31,5 @@ CategoriaModel.init({
     tableName: 'tb_Categorias',
     timestamps: false
 });
-
+CategoriaModel.belongsTo(ProyectoModel, { foreignKey: 'idProyecto' });
 module.exports = CategoriaModel;

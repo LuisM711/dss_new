@@ -21,11 +21,11 @@ module.exports.test = async (req, res) => {
     }
     console.log("Finalizacion de reinicio de la base de datos");
     //insersion de datos
-    const proyecto = await ProyectoModel.create({ nombre: 'Laptop(prueba)', descripcion: 'Este proyecto de prueba es para elegir una laptop' });
     const grupos = await GrupoModel.bulkCreate([
-        { nombre: 'Asesores', idProyecto: proyecto.id },
-        { nombre: 'Decisores', idProyecto: proyecto.id }
+        { nombre: 'Asesores'},
+        { nombre: 'Decisores'}
     ]);
+    const proyecto = await ProyectoModel.create({ nombre: 'Laptop(prueba)', descripcion: 'Este proyecto de prueba es para elegir una laptop' });
     const usuarios = await UsuarioModel.bulkCreate([
         { nombre: 'Asesor 1', idGrupo: grupos[0].id },
         { nombre: 'Decisor 1', idGrupo: grupos[1].id }

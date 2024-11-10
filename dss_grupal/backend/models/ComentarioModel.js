@@ -2,6 +2,7 @@ const { Model, DataTypes, DATE } = require('sequelize');
 const ProyectoModel = require('./ProyectoModel.js');
 const AlternativaModel = require('./AlternativaModel.js');
 const UsuarioModel = require('./UsuarioModel.js');
+const CategoriaModel = require('./CategoriaModel.js');
 const sequelize = require('../database.js');
 
 class ComentarioModel extends Model { }
@@ -10,6 +11,7 @@ ComentarioModel.init({
     idComentario: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     idProyecto: {
@@ -17,21 +19,24 @@ ComentarioModel.init({
         references: {
             model: ProyectoModel,
             key: 'idProyecto'
-        }
+        },
+        allowNull: false,
     },
-    idAlternativa: {
+    idCategoria: {
         type: DataTypes.INTEGER,
         references: {
-            model: AlternativaModel,
-            key: 'idAlternativa'
-        }
+            model: CategoriaModel,
+            key: 'idCategoria'
+        },
+        allowNull: false,
     },
     idUsuario: {
         type: DataTypes.INTEGER,
         references: {
             model: UsuarioModel,
             key: 'idUsuario'
-        }
+        },
+        allowNull: false
     },
     fecha: {
         type: DATE,
@@ -39,7 +44,11 @@ ComentarioModel.init({
     },
     comentario: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
+    },
+    aprobado: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true
     }
 }, {
     sequelize,
@@ -48,7 +57,7 @@ ComentarioModel.init({
     timestamps: false
 });
 ComentarioModel.belongsTo(ProyectoModel, { foreignKey: 'idProyecto' });
-ComentarioModel.belongsTo(AlternativaModel, { foreignKey: 'idAlternativa' });
+ComentarioModel.belongsTo(CategoriaModel, { foreignKey: 'idCategoria' });
 ComentarioModel.belongsTo(UsuarioModel, { foreignKey: 'idUsuario' });
 
 module.exports = ComentarioModel;

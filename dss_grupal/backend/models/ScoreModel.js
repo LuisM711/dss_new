@@ -1,4 +1,4 @@
-const { Model, DataTypes, DATE } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const ProyectoModel = require('./ProyectoModel.js');
 const AlternativaModel = require('./AlternativaModel.js');
 const sequelize = require('../database.js');
@@ -9,6 +9,7 @@ ScoreModel.init({
     idScore: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     idProyecto: {
@@ -16,14 +17,16 @@ ScoreModel.init({
         references: {
             model: ProyectoModel,
             key: 'idProyecto'
-        }
+        },
+        allowNull: false,
     },
     idAlternativa: {
         type: DataTypes.INTEGER,
         references: {
             model: AlternativaModel,
             key: 'idAlternativa'
-        }
+        },
+        allowNull: false,
     },
     score: {
         type: DataTypes.FLOAT,

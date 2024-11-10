@@ -27,16 +27,29 @@ module.exports.test = async (req, res) => {
     ]);
     const proyecto = await ProyectoModel.create({ nombre: 'Laptop(prueba)', descripcion: 'Este proyecto de prueba es para elegir una laptop' });
     const usuarios = await UsuarioModel.bulkCreate([
-        { nombre: 'Asesor 1', idGrupo: grupos[0].id },
-        { nombre: 'Decisor 1', idGrupo: grupos[1].id }
+        { nombre: 'Asesor 1', idGrupo: grupos[0].dataValues.idGrupo },
+        { nombre: 'Decisor 1', idGrupo: grupos[1].dataValues.idGrupo }
     ]);
-    //alternativa bulkCreate
     const alternativas = await AlternativaModel.bulkCreate([
-        { nombre: 'Lenovo', descripcion: 'Laptop de prueba como alternativa', proyectoId: proyecto.id },
-        { nombre: 'Asus', descripcion: 'Otra laptop de prueba como alternativa', proyectoId: proyecto.id }
+        { nombre: 'Lenovo', descripcion: 'Laptop de prueba como alternativa', idProyecto: proyecto.idProyecto },
+        { nombre: 'Asus', descripcion: 'Otra laptop de prueba como alternativa', idProyecto: proyecto.idProyecto }
     ]);
-    
-
+    //console.log(proyecto);return res.json({ message: 'Listo' });
+    const criterios = await CriterioModel.bulkCreate([
+        { nombre: 'Precio', descripcion: 'El precio de la laptop', idProyecto: proyecto.idProyecto },
+        { nombre: 'Costo', descripcion: 'El costo de la laptop', idProyecto: proyecto.idProyecto },
+        //separacion logica de criterios a categorias
+        { nombre: 'Potencia', descripcion: 'La potencia de la laptop', idProyecto: proyecto.idProyecto },
+        { nombre: 'GPU', descripcion: 'La grafica de la laptop', idProyecto: proyecto.idProyecto }
+    ]);
+    const categorias = await CategoriaModel.bulkCreate([
+        { nombre: 'Precio', idProyecto: proyecto.idProyecto },
+        { nombre: 'Potencia', idProyecto: proyecto.idProyecto }
+    ]);
+    const comentarios = await ComentarioModel.bulkCreate([
+        { idProyecto: proyecto.idProyecto, idCategoria: categorias[0].idCategoria, idUsuario: usuarios[1].idUsuario, fecha: new Date(), comentario: 'Comentario de prueba para el precio', aprobado: true },
+        { idProyecto: proyecto.idProyecto, idCategoria: categorias[1].idCategoria, idUsuario: usuarios[1].idUsuario, fecha: new Date(), comentario: 'Comentario de prueba para la potencia', aprobado: true }
+    ]);
     
 
 

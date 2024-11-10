@@ -1,17 +1,19 @@
-const { Model, DataTypes, DATE } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const GrupoModel = require('./GrupoModel.js');
 const sequelize = require('../database.js');
 
 class UsuarioModel extends Model { }
 UsuarioModel.init({
-    idUser: {
+    idUsuario: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     nombre: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
     },
     idGrupo: {
         type: DataTypes.INTEGER,
@@ -19,7 +21,8 @@ UsuarioModel.init({
         references: {
             model: GrupoModel,
             key: 'idGrupo'
-        }
+        },
+        allowNull: false,
     }
 }, {
     sequelize,

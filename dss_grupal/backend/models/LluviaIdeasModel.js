@@ -8,6 +8,7 @@ LluviaIdeasModel.init({
     idLluviaIdeas: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     idProyecto: {
@@ -15,14 +16,16 @@ LluviaIdeasModel.init({
         references: {
             model: ProyectoModel,
             key: 'idProyecto'
-        }
+        },
+        allowNull: false,
     },
     idUsuario: {
         type: DataTypes.INTEGER,
         references: {
             model: UsuarioModel,
             key: 'idUsuario'
-        }
+        },
+        allowNull: false,
     },
     fecha: {
         type: DATE,

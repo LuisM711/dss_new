@@ -6,6 +6,7 @@ ProyectoModel.init({
     idProyecto: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     nombre: {

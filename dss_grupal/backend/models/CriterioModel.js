@@ -9,33 +9,28 @@ CriterioModel.init({
     idCriterio: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
-    },
-    idCategoria: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: CategoriaModel,
-            key: 'idCategoria'
-        }
     },
     idProyecto: {
         type: DataTypes.INTEGER,
         references: {
             model: ProyectoModel,
             key: 'idProyecto'
-        }
-    },
-    nombre:{
-        type:DataTypes.STRING,
+        },
         allowNull: false
     },
-    descripcion:{
-        type:DataTypes.STRING,
+    nombre: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    peso:{
-        type:DataTypes.INTEGER,
-        allowNull: false
+    descripcion: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    peso: {
+        type: DataTypes.INTEGER,
+        allowNull: true
     }
 }, {
     sequelize,
@@ -43,7 +38,7 @@ CriterioModel.init({
     tableName: 'tb_Criterios',
     timestamps: false
 });
-CriterioModel.belongsTo(CategoriaModel, {foreignKey: 'idCategoria'});
-CriterioModel.belongsTo(ProyectoModel, {foreignKey: 'idProyecto'});
+CriterioModel.belongsTo(CategoriaModel, { foreignKey: 'idCategoria' });
+CriterioModel.belongsTo(ProyectoModel, { foreignKey: 'idProyecto' });
 
 module.exports = CriterioModel;

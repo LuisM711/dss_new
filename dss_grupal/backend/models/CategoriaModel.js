@@ -8,23 +8,25 @@ CategoriaModel.init({
     idCategoria: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     nombre: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     idProyecto: {
         type: DataTypes.INTEGER,
         references: {
             model: ProyectoModel,
             key: 'idProyecto'
-        }
-    },
-    estatus: {
-        type: DataTypes.STRING,
+        },
         allowNull: false
     },
+    // estatus: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
 }, {
     sequelize,
     modelName: 'CategoriaModel',

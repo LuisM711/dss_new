@@ -1,4 +1,4 @@
-const { Model, DataTypes, DATE } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const ProyectoModel = require('./ProyectoModel.js');
 const AlternativaModel = require('./AlternativaModel.js');
 const CriterioModel = require('./CriterioModel.js');
@@ -9,6 +9,7 @@ MatrizModel.init({
     idMatriz: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     idProyecto: {
@@ -16,21 +17,24 @@ MatrizModel.init({
         references: {
             model: ProyectoModel,
             key: 'idProyecto'
-        }
+        },
+        allowNull: false,
     },
     idAlternativa: {
         type: DataTypes.INTEGER,
         references: {
             model: AlternativaModel,
             key: 'idAlternativa'
-        }
+        },
+        allowNull: false,
     },
     idCriterio: {
         type: DataTypes.INTEGER,
         references: {
             model: CriterioModel,
             key: 'idCriterio'
-        }
+        },
+        allowNull: false,
     },
     valor: {
         type: DataTypes.FLOAT,

@@ -7,6 +7,7 @@ ChatModel.init({
     idChat: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     },
     idUsuario: {
@@ -14,7 +15,8 @@ ChatModel.init({
         references: {
             model: UsuarioModel,
             key: 'idUsuario'
-        }
+        },
+        allowNull: false,
     },
     fecha: {
         type: DataTypes.DATE,

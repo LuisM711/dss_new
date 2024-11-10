@@ -8,6 +8,8 @@ AlternativaModel.init({
     idAlternativa: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        unique: true,
+        autoIncrement: true,
         primaryKey: true
     },
     idProyecto: {
@@ -15,11 +17,12 @@ AlternativaModel.init({
         references: {
             model: ProyectoModel,
             key: 'idProyecto'
-        }
+        },
+        allowNull: false
     },
     nombre:{
         type:DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
     descripcion:{
         type:DataTypes.STRING,
